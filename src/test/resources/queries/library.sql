@@ -1,1 +1,0 @@
-select id,name,author, isbn, year from books where name = 'Clean Code' and author='Robert C.Martin' order by id desc;
