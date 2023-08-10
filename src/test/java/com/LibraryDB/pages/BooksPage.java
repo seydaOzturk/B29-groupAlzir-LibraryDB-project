@@ -34,7 +34,7 @@ public class BooksPage {
     @FindBy (xpath = "//button[@type='submit']")
     public WebElement saveChangesButton;
 
-    @FindBy(xpath = "//class[.='The book has been updated']")
+    @FindBy(xpath = "//div[@class='toast-message']")
     public WebElement bookIsSavedMessage;
 
 

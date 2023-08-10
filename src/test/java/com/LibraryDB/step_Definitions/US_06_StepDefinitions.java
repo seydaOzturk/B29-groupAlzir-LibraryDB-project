@@ -5,6 +5,7 @@ import com.LibraryDB.pages.LoginPage;
 import com.LibraryDB.utility.BrowserUtil;
 import com.LibraryDB.utility.DB_Util;
 import com.LibraryDB.utility.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -12,6 +13,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.Map;
 
 public class US_06_StepDefinitions {
 
@@ -45,24 +48,28 @@ public class US_06_StepDefinitions {
     public void the_librarian_enter_book_name(String bookName) {
         BrowserUtil.waitFor(2);
         booksPage.bookNameInput.sendKeys(bookName);
+        expectedBookName = bookName;
     }
 
     @When("the librarian enter ISBN {string}")
     public void the_librarian_enter_isbn(String isbn) {
         BrowserUtil.waitFor(2);
         booksPage.isbnInput.sendKeys(isbn);
+        expectedISBN = isbn;
     }
 
     @When("the librarian enter year {string}")
     public void the_librarian_enter_year(String year) {
         BrowserUtil.waitFor(2);
         booksPage.yearInput.sendKeys(year);
+        expectedBookYear = year;
     }
 
     @When("the librarian enter author {string}")
     public void the_librarian_enter_author(String author) {
         BrowserUtil.waitFor(2);
         booksPage.authorInput.sendKeys(author);
+        expectedAuthorName = author;
         BrowserUtil.waitFor(2);
     }
 
@@ -74,6 +81,7 @@ public class US_06_StepDefinitions {
                 categories.click();
             }
         }
+        expectedBookCategory = bookCategory;
         BrowserUtil.waitFor(2);
     }
 
@@ -88,16 +96,30 @@ public class US_06_StepDefinitions {
         Assert.assertTrue(booksPage.bookIsSavedMessage.isDisplayed());
     }
 
-    @Then("verify {string} information must match with DB")
-    public void verify_information_must_match_with_db(String bookName) {
-        DB_Util.createConnection();
-        String query = "select id,name,author, isbn, year from books where name = 'Clean Code' and author='Robert C.Martin' order by id desc";
+
+    @And("verify {string} information must match with DB")
+    public void verifyInformationMustMatchWithDB(String bookName) {
+        String query = "select name,author from books where name='"+bookName+"' and author='"+expectedAuthorName+"' order by id desc";
+
         DB_Util.runQuery(query);
+        String actualAuthorName = DB_Util.getCellValue(1, 2);
+        String actualBookName = DB_Util.getFirstRowFirstColumn();
+
+        System.out.println("actualAuthorName = " + actualAuthorName);
+        System.out.println("actualBookName = " + actualBookName);
+
+        Assert.assertEquals(expectedBookName, actualBookName);
+        Assert.assertEquals(expectedAuthorName,actualAuthorName);
+
 
 
     }
 
 
 
-
 }
+
+
+
+
+
