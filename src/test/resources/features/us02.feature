@@ -1,3 +1,4 @@
+@us02 @db
 Feature: As a librarian, I want to know borrowed books number
 
   Scenario: verify the total amount of borrowed books
@@ -6,4 +7,3 @@ Feature: As a librarian, I want to know borrowed books number
     Then borrowed books number information must match with DB
 
 
-  // Query : select count(*) from book_borrow where is_returned=0;
