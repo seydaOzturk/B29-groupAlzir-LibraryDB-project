@@ -16,6 +16,8 @@ public class BooksPage extends BasePage {
 
     @FindBy(xpath = "//a[contains(@class, 'btn-sm add_book_btn')]")
     public WebElement addBooksButton;
+    @FindBy(id = "book_categories")
+    public WebElement mainCategoryElement;
 
     @FindBy(xpath = "//input[@placeholder='Book Name']")
     public WebElement bookNameInput;
