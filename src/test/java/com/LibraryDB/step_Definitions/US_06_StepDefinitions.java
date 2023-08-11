@@ -27,11 +27,6 @@ public class US_06_StepDefinitions {
     String expectedAuthorName;
     String expectedBookCategory;
 
-    @Given("the {string} on the home page")
-    public void the_on_the_home_page(String userType) {
-
-        loginPage.login(userType);
-    }
 
     @Given("the user navigates to {string} page")
     public void the_user_navigates_to_page(String booksModule) {
