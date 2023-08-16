@@ -16,6 +16,11 @@ public class BookBorrowPage {
     @FindBy(xpath = "//td[text()='The Lion']//parent::tr//td//a")
     public WebElement borrowBookBtn;
 
+    //it works for all books, dynamic
+    @FindBy(xpath = "//*[@id=\"tbl_books\"]/tbody/tr/td[1]")
+    public WebElement borrowBookButton;
+
+
     @FindBy(xpath = "//tr//td[2]")
     public List<WebElement> allBorrowedBooksName;
 
